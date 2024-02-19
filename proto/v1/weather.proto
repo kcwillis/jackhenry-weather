@@ -1,0 +1,26 @@
+syntax = "proto3";
+package weather.v1;
+option go_package = "github.com/kcwillis/jackhenry/weather/v1";
+
+import "google/api/annotations.proto";
+
+service WeatherService {
+    rpc CurrentWeather(CurrentWeatherRequest) returns (CurrentWeatherResponse) {
+        option (google.api.http) = {
+            get: "/v1/weather"
+        };
+    }
+}
+
+/*
+CurrentWeatherRequest
+TODO: add markup for validation plugin
+*/
+message CurrentWeatherRequest {
+    float lat = 1;
+    float lon = 2;
+}
+message CurrentWeatherResponse {
+    string condition = 1;
+    string climate   = 2;
+}
